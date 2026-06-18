@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Friend Forum</title>
+
+    <style>
+        body {
+            background-color: #ff0090;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        input {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="login">
+    <h2>Enter Passcode</h2>
+    <input type="u+me=<3" id="password">
+    <img src="https://i.pinimg.com/736x/c1/b0/56/c1b056fa46637bae3658b932f9ce5349.jpg" onclick="checkPassword()" style="width: 35px;">
+    <button onclick="checkPassword()">Enter</button>
+    <p id="message"></p>
+</div>
+
+<div id="website" style="display:none;">
+    <h1>Welcome to LYLAUNDERCOVER</h1>
+    <p>You got in!</p>
+</div>
+
+<script>
+function checkPassword() {
+    const password = document.getElementById("password").value;
+
+    if (password === "u+me=<3") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("website").style.display = "block";
+    } else {
+        document.getElementById("message").textContent = "Incorrect passcode.";
+    }
+}
+
+
+</script>
+
+<script>
+function checkPassword() {
+    const password = document.getElementById("password").value;
+
+    if (password === "u+me=<3") {
+        window.location.href = "theundercoverfriendforum.html";
+    } else {
+        alert("Incorrect passcode");
+    }
+}
+</script>
+
+</html>
