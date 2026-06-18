@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Story Form</title>
+
+    <!-- Font (optional cool retro font) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #ff0090;
+            color: white;
+            font-family: "Pixelify Sans", Arial, sans-serif;
+
+            /* center everything */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-box {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border: 3px solid white;
+            border-radius: 10px;
+            width: 350px;
+        }
+
+        input, textarea {
+            width: 90%;
+            padding: 8px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #006767;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #004c4c;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="form-box">
+    <h2>Tell Me Something!</h2>
+
+    <!-- FORM START -->
+    <form action="https://formspree.io/f/mykaarlk" method="POST">
+
+        <input type="text"
+               name="name"
+               placeholder="Your Name"
+               required>
+
+        <br>
+
+        <textarea name="story"
+                  placeholder="Your Story / Message"
+                  rows="6"
+                  required></textarea>
+
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <!-- FORM END -->
+
+</div>
+
+</body>
+</html>

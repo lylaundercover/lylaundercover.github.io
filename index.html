@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+<title> LYLAUNDERCOVER </title>
+</head>
+<body style="background-color: #ff0090; color: white; font-family: Arial, sans-serif;">
+<div id="page" style="
+    position: relative;
+    width: 1800px;
+    margin: 0 auto;
+    min-height: 1500px;
+">
+
+<div style="
+    background-image: url('https://i.pinimg.com/originals/60/6a/8a/606a8ad0fb126797e3abcc10db6d40e4.gif');
+    height: 100px;
+    width: 100%;
+">
+<div style="
+    background-image: url('https://i.pinimg.com/originals/60/6a/8a/606a8ad0fb126797e3abcc10db6d40e4.gif');
+    height: 100px;
+    width: 100%;
+    text-align: center;
+">
+    <img src="lylaundercover.png"
+         alt="lylaundercover"
+         title="lylaundercover"
+         height="100"
+         width="400">
+</div>
+<br>
+</div>
+<hr>
+<br>
+
+<img src="https://i.pinimg.com/originals/8c/9a/10/8c9a1093ef7e4b59aa916a7f07f0e101.gif" alt="background side" style="position: absolute; top: 150px; left: 1200px; height: 1000px; width: 600px; border: 5px solid rgb(26, 98, 192)">
+<br>
+<div style="position:relative; height:500px;"> <img src="https://i.pinimg.com/736x/48/a9/49/48a949e2b0c9d95877a76a48cf1695ed.jpg" id="playImage" style="cursor:pointer; width:100px; position:absolute; top:20px; left:1230px;">
+
+<audio id="myAudio">
+  <source src="You Are My Destiny - 1963 Version - Paul Anka - Spotimate.app.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const audio = document.getElementById("myAudio");
+const image = document.getElementById("playImage");
+
+image.addEventListener("click", async () => {
+  try {
+    if (audio.paused) {
+      await audio.play();
+    } else {
+      audio.pause();
+    }
+  } catch (err) {
+    console.log("Audio failed to play:", err);
+  }
+});
+</script> </div>
+<div>
+  <p style="
+    position:absolute;
+    top:280px;
+    left:1220px;
+    color:white;
+    font-size:12px;
+  ">
+    Play My Fav Song Atm!
+  </p>
+</div>
+<div>
+<img src="spotifytitle.png" alt="spotify title"
+     style="
+       position:absolute;
+       top:180px;
+       left:1635px;
+       height: 50px;
+       width:160px;
+       transform: rotate(15deg);
+     ">
+</div>
+
+<div>
+<img src="https://i.pinimg.com/736x/f9/30/4f/f9304fc9ccfb9dc86ad11c747d4c024b.jpg" alt="me"
+     style="
+       position:absolute;
+       top:210px;
+       left:1410px;
+       height: 300px;
+       width:250px;
+       transform: rotate(-15deg);
+     ">
+</div>
+<div> <a href="https://open.spotify.com/user/3ttx1tlialwa62r2lmkpzid0j?si=42431974914f404b">
+  <img src="myspotify.png"
+       style="
+         position:absolute;
+         top:250px;
+         left:1680px;
+         width:100px;
+       "
+       alt="my spotify">
+</a> </div>
+<div> 
+    <a href="myphotos.html" target="_blank" title="my photos">
+  <img src="myphotos.png"
+       style="
+         position:absolute;
+         top:350px;
+         left:1300px;
+         width:100px;
+       "
+       alt="My Photos">
+</a>
+</div>
+<div>
+<img src="myphotostitle.png" alt="my photos title"
+     style="
+       position:absolute;
+       top:450px;
+       left:1250px;
+       width:150px;
+       height:50px;
+       transform: rotate(15deg);
+     ">
+
+</div>
+<div>
+<img src="friends.png" alt="friends"
+     style="
+       position:absolute;
+       top:800px;
+       left:1270px;
+       width:250px;
+       height:300px;
+       transform: rotate(15deg);
+     ">
+
+</div>
+<div>
+<a href="friendforum.html" target="_blank" title="friend forum">
+  <img src="friendforum.png"
+       style="
+         position:absolute;
+         top:570px;
+         left:1280px;
+         width:100px;
+       "
+       alt="Friend Forum">
+</a>
+
+</div>
+<div>
+<img src="friendforumtitle.png" alt="friend forum title"
+     style="
+       position:absolute;
+       top:660px;
+       left:1280px;
+       width:170px;
+       height:50px;
+       transform: rotate(-15deg);
+     ">
+
+</div>
+
+
+<div>
+<img src="tellmesomethingtitle.png" alt="tell me something title"
+     style="
+       position:absolute;
+       top:700px;
+       right:70px;
+       width:230px;
+       height:50px;
+       transform: rotate(-15deg);
+     ">
+
+
+<a href="tellmesomething.html" target="_blank" title="tell me something">
+  <img src="tellmesomething.png"
+       style="
+         position:absolute;
+         top:580px;
+         right:160px;
+         width:140px;
+       "
+       alt="Tell Me Something">
+</a>
+
+</div>
+<div>
+<a href="blog.html" target="_blank" title="my blog">
+  <img src="mymonthlyblog.png"
+       style="
+         position:absolute;
+         top:900px;
+         right:50px;
+         width:120px;
+       "
+       alt="My Monthly Blog">
+</a>
+
+
+<img src="mymonthlyblogtitle.png" alt="my monthly blog title"
+     style="
+       position:absolute;
+       top:1030px;
+       right:50px;
+       width:210px;
+       height:50px;
+       transform: rotate(15deg);
+     ">
+
+</div>
+</body>
+
+</html>
