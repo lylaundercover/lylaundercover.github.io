@@ -3,8 +3,33 @@
 <head>
     <meta charset="UTF-8">
 <title> LYLAUNDERCOVER </title>
+<style>
+body{
+    background:#ff0090;
+    color:white;
+    font-family:Arial, sans-serif;
+    text-align:center;
+}
+
+.gallery{
+    margin-top:50px;
+}
+
+.gallery img{
+    width:500px;
+    max-width:90%;
+    border:5px solid white;
+}
+
+button{
+    margin:20px;
+    padding:10px 20px;
+    font-size:18px;
+    cursor:pointer;
+}
+</style>
 </head>
-<body style="background-color: #ff0090; color: white; font-family: Arial, sans-serif;">
+
 <div id="page" style="
     position: relative;
     width: 1800px;
@@ -33,5 +58,53 @@
 </div>
 <hr>
 <br>
+
+<body>
+
+<div class="gallery">
+    <button onclick="previousImage()">◀ Previous</button>
+
+    <img id="galleryImage" src="image1.jpg">
+
+    <button onclick="nextImage()">Next ▶</button>
+</div>
+
+<script>
+// List your images here
+const images = [
+    "thevibes.jpg",
+    "RHONDA.jpg",
+    "pinkyupduhduhduh.jpg",
+    "meposing.jpg"
+    ,"meandnat.jpg",
+    "meandmichael.jpg",
+    "guardandwhatnot.jpg",
+    "city.jpg",
+    "buccasomething.jpg"
+];
+
+let currentImage = 0;
+
+function showImage(){
+    document.getElementById("galleryImage").src = images[currentImage];
+}
+
+function nextImage(){
+    currentImage++;
+    if(currentImage >= images.length){
+        currentImage = 0; // Go back to the first image
+    }
+    showImage();
+}
+
+function previousImage(){
+    currentImage--;
+    if(currentImage < 0){
+        currentImage = images.length - 1; // Go to the last image
+    }
+    showImage();
+}
+</script>
+
 </body>
 </html>
