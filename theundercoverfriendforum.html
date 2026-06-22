@@ -4,7 +4,24 @@
     <meta charset="UTF-8">
 <title> LYLAUNDERCOVER </title>
 </head>
-<body style="background-color: #ff0090; color: white; font-family: Arial, sans-serif;">
+<body style="background-color: #ff0090; color: white">
+
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Potta+One&display=swap');
+body{font-family: "potta one" ;}
+
+#guestbook{
+    position:relative;
+    top:600px;
+}
+</style>
+<div id="page" style="
+    position: relative;
+    width: 1800px;
+    margin: 0 auto;
+    min-height: 1500px;
+">
+
 <div id="page" style="
     position: relative;
     width: 1800px;
@@ -56,8 +73,7 @@
      ">
 
 </div>
-</div>
-<div style="position:relative; height:500px;"> <img src="playbutton.png" id="playImage" style="cursor:pointer; width:100px; position:absolute; top:15px; right:235px;">
+<div style="position:relative; height:500px;"> <img src="playbutton.png" id="playImage" style="cursor:pointer; width:100px; position:absolute; top:10px; right:235px;">
 
 <audio id="myAudio">
   <source src="Mына минтип - COEMS SONG - Съездбек Искеналиев - Spotimate.app.mp3" type="audio/mpeg">
@@ -79,7 +95,7 @@ image.addEventListener("click", async () => {
   }
 });
 </script> </div>
-    <div>
+<div>
 <img src="fishyfishy.png" alt="fishyfishy"
      style="
        position:absolute;
@@ -90,5 +106,96 @@ image.addEventListener("click", async () => {
      ">
 
 </div>
+
+<div id="guestbook">
+<h2>Leave a comment, drama, joke, whatever you want basically</h2>
+
+<input type="text" id="name" placeholder="Your name">
+
+<br><br>
+
+<textarea
+id="message"
+placeholder="Leave a message!"
+rows="5"
+cols="40"></textarea>
+
+<br><br>
+
+<button id="postBtn">
+Post Message
+</button>
+
+<hr>
+
+<div id="messages"></div>
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+// Paste your firebaseConfig here
+const firebaseConfig = {
+  apiKey: "AIzaSyC5o0-eqOSx29-kK7C_CKbI7nCjhFfrBm0",
+  authDomain: "lylaundercoverfriendforum.firebaseapp.com",
+  projectId: "lylaundercoverfriendforum",
+  storageBucket: "lylaundercoverfriendforum.firebasestorage.app",
+  messagingSenderId: "848122677781",
+  appId: "1:848122677781:web:f0237be6f795905e231c1c",
+  measurementId: "G-ZWDSF2259E"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+document.getElementById("postBtn").onclick = async function(){
+
+    await addDoc(collection(db,"guestbook"),{
+
+        name:document.getElementById("name").value,
+
+        message:document.getElementById("message").value
+
+    });
+
+    location.reload();
+
+};
+
+const snapshot = await getDocs(collection(db,"guestbook"));
+
+snapshot.forEach((doc)=>{
+
+    const data = doc.data();
+
+    document.getElementById("messages").innerHTML += `
+        <div style="
+            border:2px solid white;
+            margin:20px;
+            padding:15px;
+            background:#ff5bb8;
+        ">
+            <h3>${data.name}</h3>
+            <p>${data.message}</p>
+        </div>
+    `;
+
+});
+</script>
+<br>
+<br>
 </body>
 </html>
