@@ -1,150 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> ourchats </title>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title> OUR CHAT ROOM </title>
 <style>
-body{
-margin:0;
-background:#ff0090;
-font-family:Arial,sans-serif;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
-#window{
-width:720px;
-background:#111;
-border:4px solid #ff66c4;
-border-radius:12px;
-box-shadow:0 0 20px #ff66c4;
-overflow:hidden;
-}
-#title{
-background:linear-gradient(90deg,#ff0090,#ff66c4);
-padding:12px;
-font-weight:bold;
-letter-spacing:2px;
-}
-#messages{
-height:380px;
-overflow-y:auto;
-padding:15px;
-background:#1b1b1b;
-}
-.msg{
-margin:8px 0;
-padding:8px;
-background:#2b2b2b;
-border-left:4px solid #ff66c4;
-border-radius:6px;
-}
-.name{color:#ff8fd6;font-weight:bold;}
-.time{font-size:11px;color:#bbb;}
-#controls{
-display:flex;
-gap:8px;
-padding:12px;
-background:#222;
-}
-input,button{
-padding:10px;
-border:none;
-border-radius:8px;
-}
-input{
-background:#333;
-color:white;
-}
-#username{width:130px;}
-#message{flex:1;}
-button{
-background:#ff0090;
-color:white;
-cursor:pointer;
-font-weight:bold;
-}
-button:hover{background:#ff4fb3;}
-</style>
-</head>
-<body>
-<div id="window">
-<div id="title">💬 CHAT ROOM </div>
-<div id="messages"></div>
-<div id="controls">
-<input id="username" placeholder="Username">
-<input id="message" placeholder="Type a message...">
-<button id="send">Send</button>
-</div>
-</div>
+body{margin:0;background:#ff0090;font-family:Arial;color:#fff;display:flex;justify-content:center;align-items:center;height:100vh}
+#win{width:720px;background:#111;border:4px solid #ff66c4;border-radius:12px;overflow:hidden;box-shadow:0 0 20px #ff66c4}
+#bar{background:linear-gradient(90deg,#ff0090,#ff66c4);padding:12px;font-weight:bold}
+#msgs{height:380px;overflow-y:auto;padding:15px;background:#1b1b1b}
+.msg{margin:8px 0;padding:8px;background:#2b2b2b;border-left:4px solid #ff66c4;border-radius:6px}
+.name{color:#ff8fd6;font-weight:bold}.time{font-size:11px;color:#bbb}
+#ctrl{display:flex;gap:8px;padding:12px;background:#222}
+input{padding:10px;border:none;border-radius:8px;background:#333;color:#fff}
+#user{width:140px}#text{flex:1}button{padding:10px 16px;background:#ff0090;color:#fff;border:none;border-radius:8px;cursor:pointer}
+</style></head><body>
+<div id="win"><div id="bar">💬 OUR CHAT ROOM</div><div id="msgs"></div>
+<div id="ctrl"><input id="user" placeholder="Username"><input id="text" placeholder="Type a message..."><button id="send">Send</button></div></div>
 
 <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getFirestore,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
- import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
- import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
- const firebaseConfig = {
-  apiKey: "AIzaSyD6xMt94Boojw4ZXP1qu3VBx_x067Oarxs",
-  authDomain: "chat-room-224bd.firebaseapp.com",
-  projectId: "chat-room-224bd",
-  storageBucket: "chat-room-224bd.firebasestorage.app",
-  messagingSenderId: "764721419755",
-  appId: "1:764721419755:web:097528ac4576ede2c035ae",
-  measurementId: "G-SKH934984V"
+const firebaseConfig={
+apiKey:"AIzaSyD6xMt94Boojw4ZXP1qu3VBx_x067Oarxs",
+authDomain:"chat-room-224bd.firebaseapp.com",
+projectId:"chat-room-224bd",
+storageBucket:"chat-room-224bd.firebasestorage.app",
+messagingSenderId:"764721419755",
+appId:"1:764721419755:web:097528ac4576ede2c035ae",
+measurementId:"G-SKH934984V"
 };
 
- const app = initializeApp(firebaseConfig);
- const db = getFirestore(app);
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const box=document.getElementById("msgs");
 
- const q=query(collection(db,"messages"),orderBy("created"));
- onSnapshot(q,snap=>{
-   const box=document.getElementById("messages");
-   box.innerHTML="";
-   snap.forEach(doc=>{
-     const d=doc.data();
-     const div=document.createElement("div");
-     div.className="msg";
-     div.innerHTML=`<div><span class="name">${d.user}</span></div>
-                    <div>${d.text}</div>
-                    <div class="time">${d.created?.toDate?.().toLocaleTimeString()||""}</div>`;
-     box.appendChild(div);
-   });
-   box.scrollTop=box.scrollHeight;
+const q=query(collection(db,"messages"),orderBy("created"));
+onSnapshot(q,snap=>{
+ box.innerHTML="";
+ snap.forEach(doc=>{
+  const d=doc.data();
+  const div=document.createElement("div");
+  div.className="msg";
+  const t=d.created?.toDate?d.created.toDate().toLocaleTimeString():"";
+  const name=document.createElement("div");
+name.className="name";
+name.textContent=d.user || "Guest";
+
+const text=document.createElement("div");
+text.textContent=d.text || "";
+
+const time=document.createElement("div");
+time.className="time";
+time.textContent=t;
+
+div.append(name,text,time);
+  box.appendChild(div);
  });
-
- async function send(){
-   const user=document.getElementById("username").value||"Guest";
-   const text=document.getElementById("message").value.trim();
-   if(!text) return;
-   await addDoc(collection(db,"messages"),{
-     user,
-     text,
-     created:serverTimestamp()
-   });
-   document.getElementById("message").value="";
- }
-
-const box=document.getElementById("messages");
-function demo(user,text){
- const d=document.createElement("div");
- d.className="msg";
- d.innerHTML=`<div><span class="name">${user}</span></div><div>${text}</div><div class="time">${new Date().toLocaleTimeString()}</div>`;
- box.appendChild(d);
  box.scrollTop=box.scrollHeight;
-}
-demo("System","Connect Firebase to enable live chat.");
+});
 
-document.getElementById("send").onclick=()=>{
- // replace with send() after Firebase setup
- demo(document.getElementById("username").value||"Guest",document.getElementById("message").value);
- document.getElementById("message").value="";
-};
-document.getElementById("message").addEventListener("keydown",e=>{
- if(e.key==="Enter") document.getElementById("send").click();
+async function send(){
+ const user=document.getElementById("user").value.trim()||"Guest";
+ const text=document.getElementById("text").value.trim();
+ if(!text)return;
+ await addDoc(collection(db,"messages"),{user,text,created:serverTimestamp()});
+ document.getElementById("text").value="";
+}
+document.getElementById("send").onclick=send;
+document.getElementById("text").addEventListener("keydown",e=>{if(e.key==="Enter")send();});
+const userInput=document.getElementById("user");
+
+userInput.value=localStorage.getItem("username") || "";
+
+userInput.addEventListener("change",()=>{
+    localStorage.setItem("username",userInput.value);
 });
 </script>
-</body>
-</html>
+</body></html>
