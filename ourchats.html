@@ -18,7 +18,7 @@ input{padding:10px;border:none;border-radius:8px;background:#333;color:#fff}
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 import { getFirestore,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
+projectId: "chat-room-224bd"
 const firebaseConfig={
 apiKey:"AIzaSyD6xMt94Boojw4ZXP1qu3VBx_x067Oarxs",
 authDomain:"chat-room-224bd.firebaseapp.com",
@@ -58,12 +58,24 @@ div.append(name,text,time);
  box.scrollTop=box.scrollHeight;
 });
 
-async function send(){
- const user=document.getElementById("user").value.trim()||"Guest";
- const text=document.getElementById("text").value.trim();
- if(!text)return;
- await addDoc(collection(db,"messages"),{user,text,created:serverTimestamp()});
- document.getElementById("text").value="";
+async function send() {
+    const user = document.getElementById("user").value.trim() || "Guest";
+    const text = document.getElementById("text").value.trim();
+
+    if (!text) return;
+
+    try {
+        await addDoc(collection(db, "messages"), {
+            user,
+            text,
+            created: serverTimestamp()
+        });
+
+        document.getElementById("text").value = "";
+    } catch (error) {
+        console.error("Failed to send:", error);
+        alert(error.message);
+    }
 }
 document.getElementById("send").onclick=send;
 document.getElementById("text").addEventListener("keydown",e=>{if(e.key==="Enter")send();});
